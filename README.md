@@ -1,133 +1,115 @@
+# Veterinario Backend
 
-
-# 🐾 Proyecto Veterinario Backend
-
-Aplicación backend para la gestión de usuarios, mascotas y tratamientos veterinarios, desarrollada con **Spring Boot 3.4.4**, **Java 21** y **Couchbase** como base de datos NoSQL.
+[![Java](https://img.shields.io/badge/Java_21-ED8B00?style=for-the-badge&logo=openjdk&logoColor=white)](https://openjdk.org/)
+[![Spring Boot](https://img.shields.io/badge/Spring_Boot_3-6DB33F?style=for-the-badge&logo=spring-boot&logoColor=white)](https://spring.io/projects/spring-boot)
+[![Couchbase](https://img.shields.io/badge/Couchbase-EA2328?style=for-the-badge&logo=couchbase&logoColor=white)](https://www.couchbase.com/)
+[![Maven](https://img.shields.io/badge/Maven-C71A36?style=for-the-badge&logo=apache-maven&logoColor=white)](https://maven.apache.org/)
 
 ---
 
-## 📦 Tecnologías utilizadas
+## Para recruiters
+
+API REST backend para la gestión de clínicas veterinarias — usuarios, mascotas y tratamientos — desarrollada con **Java + Spring Boot** y **Couchbase** como base de datos NoSQL documental.
+
+**Stack:** Java 21 · Spring Boot 3.4 · Spring Data Couchbase · Maven
+
+**Destacado:**
+- API REST con arquitectura en capas: controllers, services y repositories
+- Base de datos NoSQL documental con **Couchbase** — modelo de datos anidado (usuario → mascotas → tratamientos)
+- Configuración CORS para integración con cualquier frontend
+- Empaquetado WAR sobre Tomcat embebido
+
+---
+
+## Stack tecnológico
+
+**Backend** — Java 21 · Spring Boot 3.4.4 · Spring Data Couchbase · Spring Web · Maven
+
+**Base de datos** — Couchbase Server (NoSQL documental)
+
+---
+
+## Funcionalidades
+
+| Módulo | Descripción |
+|---|---|
+| **Usuarios** | CRUD completo: crear, consultar, editar y eliminar usuarios |
+| **Mascotas** | Gestión de mascotas asociadas a cada usuario |
+| **Tratamientos** | Registro de tratamientos por mascota (medicamento, dosis, duración) |
+
+---
+
+## API REST
+
+### Usuarios
+
+| Método | Endpoint | Descripción |
+|---|---|---|
+| POST | `/api/usuarios` | Crear un usuario |
+| GET | `/api/usuarios` | Obtener todos los usuarios |
+| GET | `/api/usuarios/{id}` | Obtener un usuario por ID |
+| PUT | `/api/usuarios/{id}` | Editar un usuario |
+| DELETE | `/api/usuarios/{id}` | Eliminar un usuario |
+
+### Mascotas
+
+| Método | Endpoint | Descripción |
+|---|---|---|
+| POST | `/api/usuarios/{id}/mascotas` | Agregar mascota a un usuario |
+| GET | `/api/usuarios/{id}/mascotas` | Obtener mascotas del usuario |
+| PUT | `/api/usuarios/{usuarioId}/mascotas/{mascotaId}` | Editar una mascota |
+| DELETE | `/api/usuarios/{id}/mascotas/{mascotaId}` | Eliminar una mascota |
+
+### Tratamientos
+
+| Método | Endpoint | Descripción |
+|---|---|---|
+| POST | `/api/usuarios/{usuarioId}/mascotas/{mascotaId}/tratamientos` | Agregar tratamiento |
+| GET | `/api/usuarios/{usuarioId}/mascotas/{mascotaId}/tratamientos` | Obtener tratamientos |
+| DELETE | `/api/usuarios/{usuarioId}/mascotas/{mascotaId}/tratamientos/{tratamientoId}` | Eliminar tratamiento |
+
+---
+
+## Instalación y puesta en marcha
+
+### Prerrequisitos
 
 - Java 21
-- Spring Boot 3.4.4
-- Spring Data Couchbase
-- Spring Web
-- Maven (WAR packaging)
-- Couchbase Server
-- Tomcat (como servidor embebido)
+- Maven
+- Couchbase Server corriendo en `localhost` con el bucket `veterinario` creado
 
----
-
-## 🚀 Configuración del entorno
-
-### Couchbase
-
-Asegúrate de tener Couchbase Server corriendo en `localhost` y con el bucket `veterinario` creado. Usuario y contraseña deben ser `usuario`.
-
-### `application.properties`
+### Configuración
 
 ```properties
 spring.application.name=veterinario
 server.port=4040
 
-# Configuración de Couchbase
-spring.mvc.pathmatch.matching-strategy=ANT_PATH_MATCHER
 spring.couchbase.connection-string=localhost
 spring.couchbase.bucket.name=veterinario
 spring.couchbase.username=usuario
 spring.couchbase.password=usuario
 ```
 
----
+### Pasos
 
-## 🔧 Configuración de Beans
+1. **Clona el repositorio**
+   ```bash
+   git clone https://github.com/Fernandodg97/VeterinarioBackend.git
+   cd VeterinarioBackend
+   ```
 
-### `CouchbaseConfig.java`
+2. **Inicia Couchbase** y crea el bucket `veterinario` con usuario `usuario` y contraseña `usuario`
 
-Configura el acceso a Couchbase y crea el `CouchbaseTemplate`:
+3. **Ejecuta la aplicación**
+   ```bash
+   mvn spring-boot:run
+   ```
 
-```java
-@Configuration
-@EnableCouchbaseRepositories(basePackages = "net.xeill.elpuig.veterinario.repositories")
-public class CouchbaseConfig extends AbstractCouchbaseConfiguration {
-    // Métodos que configuran conexión, usuario, contraseña y bucket
-}
-```
-
-### `CorsConfig.java`
-
-Permite peticiones CORS desde cualquier origen:
-
-```java
-@Configuration
-public class CorsConfig {
-    @Bean
-    public WebMvcConfigurer corsConfigurer() {
-        return registry -> registry.addMapping("/**")
-            .allowedOrigins("*")
-            .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
-            .allowedHeaders("*");
-    }
-}
-```
+   La API estará disponible en `http://localhost:4040`
 
 ---
 
-## 📁 Estructura del proyecto
-
-```
-net.xeill.elpuig.veterinario
-├── configs
-│   ├── CouchbaseConfig.java
-│   └── CorsConfig.java
-├── controllers
-│   ├── UsuarioController.java
-│   └── MascotaController.java
-├── models
-│   ├── Usuario.java
-│   ├── Mascota.java
-│   └── Tratamiento.java
-├── repositories
-│   └── UsuarioRepository.java
-└── services
-    └── UsuarioService.java
-```
-
----
-
-## 📮 API REST
-
-### Usuarios
-
-| Método | Endpoint                     | Descripción                       |
-|--------|------------------------------|-----------------------------------|
-| POST   | `/api/usuarios`              | Crear un usuario                  |
-| GET    | `/api/usuarios`              | Obtener todos los usuarios        |
-| GET    | `/api/usuarios/{id}`         | Obtener un usuario por ID         |
-| GET    | `/api/usuarios/{email}`      | Obtener un usuario por email      |
-| PUT    | `/api/usuarios/{id}`         | Editar un usuario por ID          |
-| DELETE | `/api/usuarios/{id}`         | Eliminar un usuario               |
-
-### Mascotas
-
-| Método | Endpoint                                               | Descripción                              |
-|--------|--------------------------------------------------------|------------------------------------------|
-| POST   | `/api/usuarios/{id}/mascotas`                          | Agregar mascota a un usuario             |
-| GET    | `/api/usuarios/{id}/mascotas`                          | Obtener todas las mascotas del usuario   |
-| PUT    | `/api/usuarios/{usuarioId}/mascotas/{mascotaId}`      | Editar una mascota                       |
-| DELETE | `/api/usuarios/{id}/mascotas/{mascotaId}`             | Eliminar una mascota                     |
-
-### Tratamientos
-
-| Método | Endpoint                                                                           | Descripción                                |
-|--------|------------------------------------------------------------------------------------|--------------------------------------------|
-| POST   | `/api/usuarios/{usuarioId}/mascotas/{mascotaId}/tratamientos`                     | Agregar tratamiento a una mascota          |
-| GET    | `/api/usuarios/{usuarioId}/mascotas/{mascotaId}/tratamientos`                     | Obtener todos los tratamientos de mascota  |
-| DELETE | `/api/usuarios/{usuarioId}/mascotas/{mascotaId}/tratamientos/{tratamientoId}`     | Eliminar tratamiento                       |
-
----
-
-## 📤 Ejemplos de peticiones
+## Ejemplos de peticiones
 
 ### Crear usuario
 
@@ -163,8 +145,8 @@ Content-Type: application/json
 ```http
 POST /api/usuarios/12345/mascotas/111/tratamientos
 Content-Type: application/json
+
 {
-  "mascotaId": "mascota001",
   "medicamento": "Antiinflamatorio",
   "dosis": "250mg",
   "duracion": "5 días"
@@ -173,11 +155,14 @@ Content-Type: application/json
 
 ---
 
-## 👨‍💻 Autores
-- [@Fernandodg97](https://github.com/Fernandodg97)
-- [@Msedjari10](https://github.com/Msedjari10)
+## Autor
+
+| | |
+|---|---|
+| **Fernando Diaz** | [github.com/Fernandodg97](https://github.com/Fernandodg97) |
+
 ---
 
-## 📄 Licencia
+## Licencia
 
 [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.es)
