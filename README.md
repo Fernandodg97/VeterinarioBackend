@@ -7,7 +7,7 @@
 
 ---
 
-## Para recruiters
+## 👋 Para recruiters
 
 API REST backend para la gestión de clínicas veterinarias — usuarios, mascotas y tratamientos — desarrollada con **Java + Spring Boot** y **Couchbase** como base de datos NoSQL documental.
 
@@ -21,7 +21,7 @@ API REST backend para la gestión de clínicas veterinarias — usuarios, mascot
 
 ---
 
-## Stack tecnológico
+## 🛠️ Stack tecnológico
 
 **Backend** — Java 21 · Spring Boot 3.4.4 · Spring Data Couchbase · Spring Web · Maven
 
@@ -29,7 +29,7 @@ API REST backend para la gestión de clínicas veterinarias — usuarios, mascot
 
 ---
 
-## Funcionalidades
+## ✨ Funcionalidades
 
 | Módulo | Descripción |
 |---|---|
@@ -39,7 +39,7 @@ API REST backend para la gestión de clínicas veterinarias — usuarios, mascot
 
 ---
 
-## API REST
+## 📮 API REST
 
 ### Usuarios
 
@@ -70,7 +70,7 @@ API REST backend para la gestión de clínicas veterinarias — usuarios, mascot
 
 ---
 
-## Instalación y puesta en marcha
+## 🚀 Instalación y puesta en marcha
 
 ### Prerrequisitos
 
@@ -109,7 +109,7 @@ spring.couchbase.password=usuario
 
 ---
 
-## Ejemplos de peticiones
+## 📤 Ejemplos de peticiones
 
 ### Crear usuario
 
@@ -155,7 +155,7 @@ Content-Type: application/json
 
 ---
 
-## Autor
+## 👨‍💻 Autor
 
 | | |
 |---|---|
@@ -163,6 +163,6 @@ Content-Type: application/json
 
 ---
 
-## Licencia
+## 📄 Licencia
 
 [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.es)
