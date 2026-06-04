@@ -9,13 +9,13 @@
 
 ## 👋 Para recruiters
 
-API REST backend para la gestión de clínicas veterinarias — usuarios, mascotas y tratamientos — desarrollada con **Java + Spring Boot** y **Couchbase** como base de datos NoSQL documental.
+API REST backend para la gestión de clínicas veterinarias, usuarios, mascotas y tratamientos, desarrollada con **Java + Spring Boot** y **Couchbase** como base de datos NoSQL documental.
 
 **Stack:** Java 21 · Spring Boot 3.4 · Spring Data Couchbase · Maven
 
 **Destacado:**
 - API REST con arquitectura en capas: controllers, services y repositories
-- Base de datos NoSQL documental con **Couchbase** — modelo de datos anidado (usuario → mascotas → tratamientos)
+- Base de datos NoSQL documental con **Couchbase**  modelo de datos anidado (usuario → mascotas → tratamientos)
 - Configuración CORS para integración con cualquier frontend
 - Empaquetado WAR sobre Tomcat embebido
 
@@ -23,9 +23,9 @@ API REST backend para la gestión de clínicas veterinarias — usuarios, mascot
 
 ## 🛠️ Stack tecnológico
 
-**Backend** — Java 21 · Spring Boot 3.4.4 · Spring Data Couchbase · Spring Web · Maven
+**Backend** Java 21 · Spring Boot 3.4.4 · Spring Data Couchbase · Spring Web · Maven
 
-**Base de datos** — Couchbase Server (NoSQL documental)
+**Base de datos** Couchbase Server (NoSQL documental)
 
 ---
 
