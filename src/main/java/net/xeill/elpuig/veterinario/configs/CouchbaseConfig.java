@@ -6,6 +6,8 @@ import org.springframework.data.couchbase.config.AbstractCouchbaseConfiguration;
 import org.springframework.data.couchbase.core.CouchbaseTemplate;
 import org.springframework.data.couchbase.core.mapping.CouchbaseMappingContext;
 import org.springframework.data.couchbase.repository.config.EnableCouchbaseRepositories;
+import com.couchbase.client.core.env.SecurityConfig;
+import com.couchbase.client.java.env.ClusterEnvironment;
 
 @Configuration // Anotación para indicar que esta clase es una clase de configuración de Spring.
 @EnableCouchbaseRepositories(basePackages = "net.xeill.elpuig.veterinario.repositories") // Habilita la búsqueda de repositorios Couchbase en el paquete especificado.
@@ -14,25 +16,33 @@ public class CouchbaseConfig extends AbstractCouchbaseConfiguration {
     // Método para obtener la cadena de conexión de Couchbase
     @Override
     public String getConnectionString() {
-        return "couchbase://localhost"; // Dirección del servidor de Couchbase, en este caso, localhost.
+        return System.getenv().getOrDefault("COUCHBASE_CONNECTION_STRING", "couchbase://localhost");
     }
 
     // Método para obtener el nombre de usuario para la conexión a Couchbase
     @Override
     public String getUserName() {
-        return "usuario"; // Nombre de usuario para la autenticación en Couchbase.
+        return System.getenv().getOrDefault("COUCHBASE_USERNAME", "usuario");
     }
 
     // Método para obtener la contraseña para la conexión a Couchbase
     @Override
     public String getPassword() {
-        return "usuario"; // Contraseña para la autenticación en Couchbase.
+        return System.getenv().getOrDefault("COUCHBASE_PASSWORD", "usuario");
     }
 
     // Método para obtener el nombre del bucket en Couchbase
     @Override
     public String getBucketName() {
         return "veterinario"; // Nombre del bucket (base de datos) que se va a usar en Couchbase.
+    }
+
+    // Habilita TLS cuando la cadena de conexión usa el esquema seguro "couchbases://" (p. ej. Couchbase Capella).
+    @Override
+    protected void configureEnvironment(ClusterEnvironment.Builder builder) {
+        if (getConnectionString().startsWith("couchbases://")) {
+            builder.securityConfig(SecurityConfig.enableTls(true).enableCertificateVerification(true));
+        }
     }
 
     // Definición del bean de CouchbaseTemplate
