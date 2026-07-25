@@ -7,6 +7,19 @@
 
 ---
 
+## 🚀 Despliegue en producción
+
+La API está desplegada y disponible públicamente en:
+
+**[https://veterinariobackend.onrender.com/](https://veterinariobackend.onrender.com/)**
+
+- **Backend**: [Render](https://render.com/) (desplegado desde el `Dockerfile` de este repo)
+- **Base de datos**: [Couchbase Capella](https://cloud.couchbase.com/) (Couchbase Server gestionado en la nube)
+
+> ⚠️ Al estar en el plan gratuito de Render, el servicio "duerme" tras ~15 min de inactividad. La primera petición tras el reposo puede tardar 30-50s en responder.
+
+---
+
 ## 👋 Para recruiters
 
 API REST backend para la gestión de clínicas veterinarias, usuarios, mascotas y tratamientos, desarrollada con **Java + Spring Boot** y **Couchbase** como base de datos NoSQL documental.
@@ -25,7 +38,7 @@ API REST backend para la gestión de clínicas veterinarias, usuarios, mascotas 
 
 **Backend** Java 21 · Spring Boot 3.4.4 · Spring Data Couchbase · Spring Web · Maven
 
-**Base de datos** Couchbase Server (NoSQL documental)
+**Base de datos** Couchbase Capella (NoSQL documental, gestionado en la nube)
 
 ---
 
@@ -70,25 +83,24 @@ API REST backend para la gestión de clínicas veterinarias, usuarios, mascotas 
 
 ---
 
-## 🚀 Instalación y puesta en marcha
+## 🚀 Instalación y puesta en marcha (local)
 
 ### Prerrequisitos
 
 - Java 21
 - Maven
-- Couchbase Server corriendo en `localhost` con el bucket `veterinario` creado
+- Un clúster Couchbase (local, Docker o Couchbase Capella) con el bucket `veterinario` creado
 
 ### Configuración
 
-```properties
-spring.application.name=veterinario
-server.port=4040
+La conexión se configura vía variables de entorno (con valores por defecto para Couchbase local):
 
-spring.couchbase.connection-string=localhost
-spring.couchbase.bucket.name=veterinario
-spring.couchbase.username=usuario
-spring.couchbase.password=usuario
-```
+| Variable | Por defecto | Descripción |
+|---|---|---|
+| `COUCHBASE_CONNECTION_STRING` | `couchbase://localhost` | Usa `couchbases://...` para conexiones seguras (p. ej. Capella) |
+| `COUCHBASE_USERNAME` | `usuario` | Usuario de la base de datos |
+| `COUCHBASE_PASSWORD` | `usuario` | Contraseña de la base de datos |
+| `CORS_ALLOWED_ORIGINS` | `*` | Orígenes permitidos para CORS (dominio del frontend en producción) |
 
 ### Pasos
 
@@ -98,7 +110,7 @@ spring.couchbase.password=usuario
    cd VeterinarioBackend
    ```
 
-2. **Inicia Couchbase** y crea el bucket `veterinario` con usuario `usuario` y contraseña `usuario`
+2. **Ten un clúster Couchbase disponible** con el bucket `veterinario` (local o Capella)
 
 3. **Ejecuta la aplicación**
    ```bash
@@ -106,6 +118,17 @@ spring.couchbase.password=usuario
    ```
 
    La API estará disponible en `http://localhost:4040`
+
+### Con Docker
+
+```bash
+docker build -t veterinario-backend .
+docker run -p 4040:4040 \
+  -e COUCHBASE_CONNECTION_STRING=couchbase://localhost \
+  -e COUCHBASE_USERNAME=usuario \
+  -e COUCHBASE_PASSWORD=usuario \
+  veterinario-backend
+```
 
 ---
 
@@ -152,14 +175,6 @@ Content-Type: application/json
   "duracion": "5 días"
 }
 ```
-
----
-
-## 📚 Documentacion
-
-| Archivo | Descripcion |
-|---|---|
-| [`Presentacion_Comunidad.pdf`](./Presentacion_Comunidad.pdf) | Presentacion del proyecto |
 
 ---
 
