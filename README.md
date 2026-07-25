@@ -13,6 +13,7 @@ La API está desplegada y disponible públicamente en:
 
 **[https://veterinariobackend.onrender.com/](https://veterinariobackend.onrender.com/)**
 
+- **Documentación API (Swagger)**: [veterinariobackend.onrender.com/swagger-ui/index.html](https://veterinariobackend.onrender.com/swagger-ui/index.html)
 - **Backend**: [Render](https://render.com/) (desplegado desde el `Dockerfile` de este repo)
 - **Base de datos**: [Couchbase Capella](https://cloud.couchbase.com/) (Couchbase Server gestionado en la nube)
 - **Frontend**: [Netlify](https://www.netlify.com/) — **[https://veterinario-web.netlify.app/](https://veterinario-web.netlify.app/)** ([github.com/Fernandodg97/Veterinario-Aplicacion-Web](https://github.com/Fernandodg97/Veterinario-Aplicacion-Web))
