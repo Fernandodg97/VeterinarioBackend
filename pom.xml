@@ -40,6 +40,13 @@
             <artifactId>spring-boot-starter-web</artifactId> <!-- Starter para crear aplicaciones web -->
         </dependency>
 
+        <!-- Dependencia para generar documentacion Swagger/OpenAPI de la API -->
+        <dependency>
+            <groupId>org.springdoc</groupId>
+            <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+            <version>2.8.5</version>
+        </dependency>
+
         <!-- Dependencia para herramientas de desarrollo en tiempo de ejecución (DevTools) -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
