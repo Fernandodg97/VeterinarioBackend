@@ -15,6 +15,7 @@ La API está desplegada y disponible públicamente en:
 
 - **Backend**: [Render](https://render.com/) (desplegado desde el `Dockerfile` de este repo)
 - **Base de datos**: [Couchbase Capella](https://cloud.couchbase.com/) (Couchbase Server gestionado en la nube)
+- **Frontend**: [Netlify](https://www.netlify.com/) — **[https://veterinario-web.netlify.app/](https://veterinario-web.netlify.app/)** ([github.com/Fernandodg97/Veterinario-Aplicacion-Web](https://github.com/Fernandodg97/Veterinario-Aplicacion-Web))
 
 > ⚠️ Al estar en el plan gratuito de Render, el servicio "duerme" tras ~15 min de inactividad. La primera petición tras el reposo puede tardar 30-50s en responder.
 
