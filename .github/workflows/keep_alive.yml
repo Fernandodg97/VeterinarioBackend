@@ -3,7 +3,9 @@ name: Mantener Couchbase Despierto
 on:
   schedule:
     # Se ejecuta cada 3 días a las 08:00 UTC
-    - cron: '0 8 */3 * *'
+    #- cron: '0 8 */3 * *'
+    # Se ejecuta todos los domingos a las 03:15 UTC
+    - cron: '15 3 * * 0'
   workflow_dispatch: # Permite activarlo manualmente desde GitHub cuando quieras
 
 jobs:
@@ -12,5 +14,5 @@ jobs:
     steps:
       - name: Consulta a la API que conecta con Couchbase
         run: |
-          curl -f -s --max-time 60 --retry 3 https://veterinariobackend.onrender.com/api/usuarios > /dev/null
+          curl -f -s --max-time 120 --retry 3 https://veterinariobackend.onrender.com/api/usuarios > /dev/null
           
