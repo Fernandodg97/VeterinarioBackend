@@ -2,10 +2,14 @@ name: Mantener Couchbase Despierto
 
 on:
   schedule:
+    # Se ejecuta cada hora en punto (00:00, 01:00, 02:00, etc.)
+     - cron: '0 * * * *'
+  
     # Se ejecuta cada 3 días a las 08:00 UTC
     #- cron: '0 8 */3 * *'
+    
     # Se ejecuta todos los domingos a las 03:15 UTC
-    - cron: '15 3 * * 0'
+    #- cron: '15 3 * * 0'
   workflow_dispatch: # Permite activarlo manualmente desde GitHub cuando quieras
 
 jobs:
