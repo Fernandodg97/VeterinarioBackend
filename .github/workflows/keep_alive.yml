@@ -1,4 +1,4 @@
-name: Mantener Couchbase Despierto
+name: Mantener API y Couchbase Despierto
 
 on:
   schedule:
